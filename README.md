@@ -26,8 +26,12 @@ Si algo se rompe sin remedio, `git restore .` te regresa al último checkpoint b
 
 Los experimentos que rompen el código a propósito van en una rama:
 
-    git switch -c experimento-d3     # antes de romper nada
-    git switch main                  # el código bueno vuelve solo
+    git switch -c experimento-d3                  # antes de romper nada
+    git add -A ; git commit -m "experimento-d3"   # al terminar: guárdalo EN la rama
+    git switch main                               # el código bueno vuelve intacto
+
+Sin el commit en la rama, `git switch main` se lleva tus cambios contigo y
+el código roto aparece en `main`.
 
 ## Uso de IA
 
@@ -36,4 +40,7 @@ Todo commit con código generado por IA debe declararlo con un trailer
 
 ## Entrega
 
-Ver la rúbrica en la guía.
+Ver la rúbrica en la guía. Al subir tu repositorio, sube también la rama del
+experimento: `gh repo create … --push` solo sube la rama actual.
+
+    git push origin --all
