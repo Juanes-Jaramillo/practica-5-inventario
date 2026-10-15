@@ -13,7 +13,7 @@ import androidx.room.RoomDatabase
  * tabla. `exportSchema = false` porque en esta práctica no versionamos el
  * esquema en el repositorio.
  */
-@Database(entities = [ProductoEntity::class], version = 1, exportSchema = false)
+@Database(entities = [ProductoEntity::class], version = 2, exportSchema = false)
 abstract class InventarioDatabase : RoomDatabase() {
 
     abstract fun productoDao(): ProductoDao
@@ -35,7 +35,8 @@ abstract class InventarioDatabase : RoomDatabase() {
                     context.applicationContext,
                     InventarioDatabase::class.java,
                     "inventario.db"
-                ).build().also { instancia = it }
+                ).fallbackToDestructiveMigration(dropAllTables = true)
+                    .build().also { instancia = it }
             }
     }
 }
